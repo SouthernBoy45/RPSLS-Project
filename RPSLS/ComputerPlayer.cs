@@ -16,11 +16,13 @@ namespace RPSLS
         }
         public override void ChooseGesture()
         {
-            gestures = new List<string> { "rock", "paper", "scissors", "lizard", "Spock" };
-            Random random = new Random();
-            int randomIndex = random.Next(gestures.Count);
-            string randomGesture = gestures[randomIndex];
-            Console.WriteLine(randomGesture);
+            {
+               
+                Random random = new Random();
+                int randomIndex = random.Next(gestures.Count);
+                chosenGesture = gestures[randomIndex];
+                Console.WriteLine(chosenGesture);
+            }
         }
     }
 }
