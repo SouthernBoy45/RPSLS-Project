@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,32 +40,34 @@ namespace RPSLS
         {
             Console.WriteLine("How many people will be playing? 1 or 2?");
             string numberOfPlayers = Console.ReadLine();
-
             if (numberOfPlayers == "1")
-            {
-                Console.WriteLine("Player One, what is your name?");
-                string playerOne = Console.ReadLine();
                 return 1;
-            }
-            else if (numberOfPlayers == "2")
-            {
-                Console.WriteLine("Player One, what is your name?");
-                string playerOne = Console.ReadLine();
 
-                Console.WriteLine("Player Two, what is your name?");
-                string playerTwo = Console.ReadLine();
+            else if (numberOfPlayers == "2")
                 return 2;
-            }
+
             else
             {
-                Console.WriteLine("Too many players! Start over!");
-                return 0;
+                Console.WriteLine("Too many players! Try again!");
+                return ChooseNumberOfHumanPlayers();
             }
         }
 
         public void CreatePlayerObjects(int numberOfHumanPlayers)
         {
-
+            if(numberOfHumanPlayers == 2)
+            {              
+                Console.WriteLine("Player One, what is your name?");
+                playerOne = new HumanPlayer(Console.ReadLine());
+                Console.WriteLine("Player Two, what is your name?");
+                playerTwo = new HumanPlayer(Console.ReadLine());
+            }
+            else if(numberOfHumanPlayers == 1)
+            {
+                Console.WriteLine("Player One, what is your name?");
+                this.playerOne = new HumanPlayer(Console.ReadLine());
+                this.playerTwo = new ComputerPlayer("EDI");
+            }
         }
 
         public void CompareGestures()
@@ -77,10 +80,15 @@ namespace RPSLS
 
         }
 
+        
+
+
         public void RunGame()
         {
             WelcomeMessage();
-            ChooseNumberOfHumanPlayers();
+            //I need something to hold the value of the choose#ofplayers. 
+            int numPlayers = ChooseNumberOfHumanPlayers();
+            CreatePlayerObjects(numPlayers);
         }
     }
 }

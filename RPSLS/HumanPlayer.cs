@@ -8,8 +8,16 @@ namespace RPSLS
 {
     internal class HumanPlayer : Player
     {
+        public HumanPlayer(string name) : base(name)
+        {
+        }
 
-        public override void ChooseGesture(){}
+        public override void ChooseGesture()
+        {
+            Console.WriteLine($"{name} choose one:\n" +
+                $"\"rock\", \"paper\", \"scissors\", \"lizard\", \"Spock");
+            this.chosenGesture = Console.ReadLine();
+        }
     }
     
 }
